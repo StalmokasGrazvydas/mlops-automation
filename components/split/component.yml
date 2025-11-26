@@ -1,0 +1,30 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+name: data_split
+version: 1
+display_name: Data Splitting to Train and Test
+type: command
+
+inputs:
+  animal_1:
+    type: uri_folder
+  animal_2:
+    type: uri_folder
+  animal_3:
+    type: uri_folder
+  train_test_split_percentage:
+    type: number
+
+outputs:
+  training_data:
+    type: uri_folder
+  testing_data:
+    type: uri_folder
+
+code: ./code
+environment: azureml:aml-Pillow:1
+command: >
+  python traintestsplit.py
+  --datasets ${{inputs.animal_1}} ${{inputs.animal_2}} ${{inputs.animal_3}}
+  --split_size ${{inputs.train_test_split_percentage}}
+  --training_data_output ${{outputs.training_data}}
+  --testing_data_output  ${{outputs.testing_data}}
