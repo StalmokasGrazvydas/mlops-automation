@@ -56,7 +56,7 @@ jobs:
       - name: Azure -- Register components
         run: |
           az ml component create --file ./components/dataprep/dataprep.yaml
-          az ml component create --file ./components/dataprep/data_split.yaml
+          az ml component create --file ./components/split/component.yaml
           az ml component create --file ./components/training/training.yaml
 
       - name: Azure -- Pipeline in Azure

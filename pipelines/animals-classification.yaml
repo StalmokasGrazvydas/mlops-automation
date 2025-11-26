@@ -54,7 +54,9 @@ jobs:
 
   data_split:
     type: command
-    component: ../components/dataprep/data_split.yaml
+    # component: ../components/dataprep/data_split.yaml
+    component: ../components/split/component.yaml
+
     inputs:
       animal_1: ${{parent.jobs.data_prep_pandas.outputs.output_data}}
       animal_2: ${{parent.jobs.data_prep_cats.outputs.output_data}}
