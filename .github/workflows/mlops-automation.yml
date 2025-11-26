@@ -138,8 +138,13 @@ jobs:
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
       - name: Docker build & push
-        env:
-          IMAGE_NAME: ghcr.io/${{ github.repository_owner }}/animals-classification
         run: |
+          # Make owner lowercase for GHCR
+          OWNER_LC=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_NAME=ghcr.io/$OWNER_LC/animals-classification
+
+          echo "Using image name: $IMAGE_NAME:latest"
+
           docker build -t $IMAGE_NAME:latest .
           docker push $IMAGE_NAME:latest
+
