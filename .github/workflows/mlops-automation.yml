@@ -96,8 +96,11 @@ jobs:
         with:
           azcliversion: 2.64.0
           inlineScript: |
+            # Workaround for msal NormalizedResponse cache bug
+            rm -f ~/.azure/msal_http_cache.bin || true
+
             az extension add --name ml -y
-            az configure --defaults group=$AZURE_RESOURCE_GROUP workspace=$AZURE_WORKSPACE location=$AZURE_LOCATION
+            az configure --defaults group=$AZURE_RESOURCE_GROUP workspace=$AZURE_WORKSPACE location=$AZURE_LOCATION    
 
             echo "Finding latest version of registered model 'animal-classification'..."
             VERSION=$(az ml model list -n animal-classification --query "[0].version" -o tsv)
