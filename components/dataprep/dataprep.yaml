@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
 name: data_prep_image_resize_cli
-version: 0.1.1
+version: 0.1.2
 display_name: Data preparation, Image Resizing
 is_deterministic: true
 type: command
