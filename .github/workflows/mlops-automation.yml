@@ -110,9 +110,8 @@ jobs:
             az ml model download \
               --name animal-classification \
               --version $VERSION \
-              --download-path inference/animal-classification \
-              --overwrite
-
+              --download-path inference/animal-classification
+              
       - name: Docker -- Upload API code from Inference
         uses: actions/upload-artifact@v4.3.3
         with:
