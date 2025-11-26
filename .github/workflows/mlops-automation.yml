@@ -37,7 +37,7 @@ jobs:
 
       - name: Azure -- Create compute
         run: |
-          az ml compute show --name cli-created-machine || az ml compute create --file ./environment/compute.yaml
+          az ml compute show --name cli-mlops-machine || az ml compute create --file ./environment/compute.yaml
 
       - name: Azure -- Register environments
         run: |
@@ -61,7 +61,7 @@ jobs:
         if: always()
         continue-on-error: true
         run: |
-          az ml compute stop --name cli-created-machine || echo "Compute already stopped"
+          az ml compute stop --name cli-mlops-machine || echo "Compute already stopped"
 
   download:
     name: Download latest model + upload inference

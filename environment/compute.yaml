@@ -1,6 +1,6 @@
 $schema: https://azuremlschemas.azureedge.net/latest/computeInstance.schema.json
 
-name: cli-created-machine
+name: cli-mlops-machine
 type: computeinstance
 size: STANDARD_DS3_V2
 
