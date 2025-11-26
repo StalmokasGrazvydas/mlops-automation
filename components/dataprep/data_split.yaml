@@ -32,4 +32,4 @@ outputs:
     type: uri_folder
 resources:
   instance_count: 1
-environment: azureml:aml-preprocessing-cli:0.1.0
+environment: azureml:aml-preprocessing-cli:0.1.1
