@@ -10,6 +10,11 @@ on:
       - "pipelines/**"
       - "inference/**"
 
+# Needed so the workflow can push images to GitHub Container Registry
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   azure-pipeline:
     name: Azure ML pipeline
@@ -39,19 +44,14 @@ jobs:
         run: |
           az ml compute show --name cli-mlops-machine || az ml compute create --file ./environment/compute.yaml
 
-    #   - name: Azure -- Register environments
-    #     run: |
-    #       az ml environment create --file ./environment/preprocessing.yaml
-    #       az ml environment create --file ./environment/training.yaml
-    #   
+      # Ensure the environments used by the components exist (version 0.1.1)
       - name: Azure -- Register environments
         run: |
-          echo "Checking aml-preprocessing-cli:0.1.0"
-          az ml environment show --name aml-preprocessing-cli --version 0.1.0 || az ml environment create --file ./environment/preprocessing.yaml
+          echo "Checking aml-preprocessing-cli:0.1.1"
+          az ml environment show --name aml-preprocessing-cli --version 0.1.1 || az ml environment create --file ./environment/preprocessing.yaml
 
-          echo "Checking aml-training-cli:0.1.0"
-          az ml environment show --name aml-training-cli --version 0.1.0 || az ml environment create --file ./environment/training.yaml
-
+          echo "Checking aml-training-cli:0.1.1"
+          az ml environment show --name aml-training-cli --version 0.1.1 || az ml environment create --file ./environment/training.yaml
 
       - name: Azure -- Register components
         run: |
@@ -111,7 +111,7 @@ jobs:
               --name animal-classification \
               --version $VERSION \
               --download-path inference/animal-classification
-              
+
       - name: Docker -- Upload API code from Inference
         uses: actions/upload-artifact@v4.3.3
         with:
@@ -121,7 +121,7 @@ jobs:
   container:
     name: Build & push Docker image
     needs: download
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out repository
@@ -135,7 +135,7 @@ jobs:
 
       - name: Log in to GitHub Container Registry
         run: |
-          echo "${{ github.token }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
 
       - name: Docker build & push
         env:
