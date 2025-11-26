@@ -5,7 +5,7 @@ name: training_cli
 display_name: Training an AI model
 description: Trains an AI model by inputting a lot of training and testing data.
 code: ./code
-environment: azureml:aml-training-cli:0.1.0
+environment: azureml:aml-training-cli:0.1.1
 command: >
   python train.py
   --training_folder ${{inputs.training_folder}}

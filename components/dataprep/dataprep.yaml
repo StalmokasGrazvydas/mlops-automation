@@ -5,7 +5,7 @@ display_name: Data preparation, Image Resizing
 is_deterministic: true
 type: command
 description: Reads a data asset of images and preprocesses them by resizing them to 64x64.
-environment: azureml:aml-preprocessing-cli:0.1.0
+environment: azureml:aml-preprocessing-cli:0.1.1
 resources:
   instance_count: 1
 code: ./code
