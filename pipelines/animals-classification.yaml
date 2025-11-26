@@ -15,8 +15,8 @@ outputs:
     mode: upload
 
 settings:
-  # default_compute: serverless
-  default_compute: azureml:cli-mlops-machine
+  default_compute: serverless
+  # default_compute: azureml:cli-mlops-machine
 
 jobs:
   data_prep_pandas:
