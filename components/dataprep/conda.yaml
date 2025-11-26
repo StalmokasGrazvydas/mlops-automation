@@ -9,7 +9,6 @@ dependencies:
   - pandas=2.3.3
   - pip=25.2
   - pip:
-      - mlflow==3.4.0
       - azureml-mlflow==1.60.0.post1
       - inference-schema[numpy-support]==1.8
       - xlrd==2.0.2
