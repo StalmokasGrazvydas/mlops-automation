@@ -37,7 +37,7 @@ jobs:
 
       - name: Azure -- Create compute
         run: |
-          az ml compute create --file ./environment/compute.yaml
+          az ml compute show --name cli-created-machine || az ml compute create --file ./environment/compute.yaml
 
       - name: Azure -- Register environments
         run: |
