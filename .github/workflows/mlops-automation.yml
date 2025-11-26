@@ -39,10 +39,19 @@ jobs:
         run: |
           az ml compute show --name cli-mlops-machine || az ml compute create --file ./environment/compute.yaml
 
+    #   - name: Azure -- Register environments
+    #     run: |
+    #       az ml environment create --file ./environment/preprocessing.yaml
+    #       az ml environment create --file ./environment/training.yaml
+    #   
       - name: Azure -- Register environments
         run: |
-          az ml environment create --file ./environment/preprocessing.yaml
-          az ml environment create --file ./environment/training.yaml
+          echo "Checking aml-preprocessing-cli:0.1.0"
+          az ml environment show --name aml-preprocessing-cli --version 0.1.0 || az ml environment create --file ./environment/preprocessing.yaml
+
+          echo "Checking aml-training-cli:0.1.0"
+          az ml environment show --name aml-training-cli --version 0.1.0 || az ml environment create --file ./environment/training.yaml
+
 
       - name: Azure -- Register components
         run: |
